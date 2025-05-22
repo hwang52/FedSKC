@@ -263,12 +263,12 @@ def FedSKC_main():
         # send all local structured knowledge to server, get global structured knowledge
         global_kn = server_model.get_global_kn(list_local_kns)
         '''Global Discrepancy Aggregation (GDA)'''
-        # list_discrepancy_weights = server_model.get_dis_weights(list_nums_local_data, list_local_kns, global_kn)
-        # global_params = server_model.discrepancy_aggregation(list_dicts_local_params, list_discrepancy_weights)
+        list_discrepancy_weights = server_model.get_dis_weights(list_nums_local_data, list_local_kns, global_kn)
+        global_params = server_model.discrepancy_aggregation(list_dicts_local_params, list_discrepancy_weights)
         global_params = server_model.average_parameters(list_dicts_local_params, list_nums_local_data)
         '''Global Period Review (GPR)'''
-        # if round_id!=1:
-        #     global_params = server_model.period_review(global_params, pre_global_params, global_kn, pre_global_kn)
+        if round_id!=1:
+            global_params = server_model.period_review(global_params, pre_global_params, global_kn, pre_global_kn)
         # global model eval
         one_re_train_acc = server_model.global_eval(global_params, data_global_test, args.batch_size_test)
         fedskc_trained_acc.append(one_re_train_acc)

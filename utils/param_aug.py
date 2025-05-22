@@ -180,7 +180,6 @@ AUGMENT_FNS = {
     'rotate': [rand_rotate],
 }
 
-
 def set_seed_DiffAug(param):
     if param.latestseed == -1:
         return
